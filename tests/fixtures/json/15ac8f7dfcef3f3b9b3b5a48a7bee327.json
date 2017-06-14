@@ -1,0 +1,10 @@
+[
+    {
+        "id": "1",
+        "name": "Example",
+        "type": "version",
+        "version": "1.0",
+        "file_name": "testfile.txt",
+        "hash": "15ac8f7dfcef3f3b9b3b5a48a7bee327"
+    }
+]
