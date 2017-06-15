@@ -13,7 +13,7 @@ class ApiHashGet
         $list = json_decode($response->getBody(), $array = true)[0]['versions'];
 
         foreach ($list as $item) {
-            $response = $client->request('GET', "$api/$item[hash]");
+            $response = $client->request('GET', "$api/version/$item[hash]");
             $result []= json_decode($response->getBody(), $array = true)[0];
         }
 
