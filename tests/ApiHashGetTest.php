@@ -7,23 +7,6 @@ class ApiHashGetTest extends TestCase
 {
     public function test_gets_all_documents()
     {
-        $given = <<<JSON
-[
-    {
-        "versions": [
-            {
-                "version": "1.0",
-                "hash": "15ac8f7dfcef3f3b9b3b5a48a7bee327"
-            },
-            {
-                "version": "1.1",
-                "hash": "5990bf1b3f11225d970c5d266e77e641"
-            }
-        ]
-    }
-]
-JSON;
-
         $expected = <<<JSON
 [
     {
@@ -45,12 +28,10 @@ JSON;
 ]
 JSON;
 
-        $endpoint = WEB_SERVER_HOST.':'.WEB_SERVER_PORT;
+        $api = WEB_SERVER_HOST.':'.WEB_SERVER_PORT;
         // or use https://example.com/api
 
-        $api = new ApiHashGet($endpoint);
-
-        $actual = $api->fetchAll($given);
+        $actual = (new ApiHashGet)->fetchAll($api);
 
         $this->assertJsonStringEqualsJsonString($expected, $actual);
     }

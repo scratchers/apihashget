@@ -4,21 +4,16 @@ namespace jpuck;
 
 class ApiHashGet
 {
-    protected $endpoint;
-
-    public function __construct(string $endpoint)
+    public function fetchAll(string $api) : string
     {
-        $this->endpoint = $endpoint;
-    }
-
-    public function fetchAll(string $json) : string
-    {
-        $list = json_decode($json, $array = true)[0]['versions'];
-
         $client = new \GuzzleHttp\Client;
 
+        $response = $client->request('GET', "$api/list");
+
+        $list = json_decode($response->getBody(), $array = true)[0]['versions'];
+
         foreach ($list as $item) {
-            $response = $client->request('GET', "{$this->endpoint}/$item[hash]");
+            $response = $client->request('GET', "$api/$item[hash]");
             $result []= json_decode($response->getBody(), $array = true)[0];
         }
 
