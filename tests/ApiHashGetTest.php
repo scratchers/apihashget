@@ -13,11 +13,11 @@ class ApiHashGetTest extends TestCase
         "versions": [
             {
                 "version": "1.0",
-                "hash": "15ac8f7dfcef3f3b9b3b5a48a7bee327",
+                "hash": "15ac8f7dfcef3f3b9b3b5a48a7bee327"
             },
             {
                 "version": "1.1",
-                "hash": "5990bf1b3f11225d970c5d266e77e641",
+                "hash": "5990bf1b3f11225d970c5d266e77e641"
             }
         ]
     }
@@ -32,7 +32,7 @@ JSON;
         "type": "version",
         "version": "1.0",
         "file_name": "testfile1.txt",
-        "hash": "15ac8f7dfcef3f3b9b3b5a48a7bee327",
+        "hash": "15ac8f7dfcef3f3b9b3b5a48a7bee327"
     },
     {
         "id": "2",
@@ -40,15 +40,18 @@ JSON;
         "type": "version",
         "version": "1.1",
         "file_name": "testfile2.txt",
-        "hash": "5990bf1b3f11225d970c5d266e77e641",
+        "hash": "5990bf1b3f11225d970c5d266e77e641"
     }
 ]
 JSON;
 
-        $api = new ApiHashGet;
+        $endpoint = WEB_SERVER_HOST.':'.WEB_SERVER_PORT;
+        // or use https://example.com/api
+
+        $api = new ApiHashGet($endpoint);
 
         $actual = $api->fetchAll($given);
 
-        $this->assertSame($expected, $actual);
+        $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
 }
